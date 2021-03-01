@@ -21,18 +21,16 @@ public class Reader {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Reader(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Reader(Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
     }
 
@@ -46,10 +44,6 @@ public class Reader {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     /**
@@ -91,14 +85,13 @@ public class Reader {
         return otherReader.getName().equals(getName())
                 && otherReader.getPhone().equals(getPhone())
                 && otherReader.getEmail().equals(getEmail())
-                && otherReader.getAddress().equals(getAddress())
                 && otherReader.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, tags);
     }
 
     @Override
@@ -109,8 +102,7 @@ public class Reader {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append("; Address: ");
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

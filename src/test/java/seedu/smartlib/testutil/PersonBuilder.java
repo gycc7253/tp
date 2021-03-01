@@ -3,7 +3,6 @@ package seedu.smartlib.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.smartlib.model.reader.Address;
 import seedu.smartlib.model.reader.Email;
 import seedu.smartlib.model.reader.Name;
 import seedu.smartlib.model.reader.Phone;
@@ -24,7 +23,6 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
     private Set<Tag> tags;
 
     /**
@@ -34,7 +32,6 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
 
@@ -45,7 +42,6 @@ public class PersonBuilder {
         name = readerToCopy.getName();
         phone = readerToCopy.getPhone();
         email = readerToCopy.getEmail();
-        address = readerToCopy.getAddress();
         tags = new HashSet<>(readerToCopy.getTags());
     }
 
@@ -66,14 +62,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
-        return this;
-    }
-
-    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -90,7 +78,7 @@ public class PersonBuilder {
     }
 
     public Reader build() {
-        return new Reader(name, phone, email, address, tags);
+        return new Reader(name, phone, email, tags);
     }
 
 }

@@ -50,7 +50,6 @@ public class ReaderCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(reader.getName().fullName);
         phone.setText(reader.getPhone().value);
-        address.setText(reader.getAddress().value);
         email.setText(reader.getEmail().value);
         reader.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
