@@ -19,11 +19,7 @@ import seedu.smartlib.commons.core.index.Index;
 import seedu.smartlib.commons.util.CollectionUtil;
 import seedu.smartlib.logic.commands.exceptions.CommandException;
 import seedu.smartlib.model.Model;
-import seedu.smartlib.model.reader.Address;
-import seedu.smartlib.model.reader.Email;
-import seedu.smartlib.model.reader.Name;
-import seedu.smartlib.model.reader.Phone;
-import seedu.smartlib.model.reader.Reader;
+import seedu.smartlib.model.reader.*;
 import seedu.smartlib.model.tag.Tag;
 
 /**
@@ -97,9 +93,10 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(readerToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(readerToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(readerToEdit.getAddress());
+        Remark updatedRemark = readerToEdit.getRemark(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(readerToEdit.getTags());
 
-        return new Reader(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Reader(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
     }
 
     @Override

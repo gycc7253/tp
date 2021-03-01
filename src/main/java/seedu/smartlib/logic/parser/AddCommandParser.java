@@ -1,22 +1,15 @@
 package seedu.smartlib.logic.parser;
 
 import static seedu.smartlib.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.smartlib.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.smartlib.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.smartlib.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.smartlib.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.smartlib.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.smartlib.logic.parser.CliSyntax.*;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.smartlib.logic.commands.AddCommand;
+import seedu.smartlib.logic.commands.RemarkCommand;
 import seedu.smartlib.logic.parser.exceptions.ParseException;
-import seedu.smartlib.model.reader.Address;
-import seedu.smartlib.model.reader.Email;
-import seedu.smartlib.model.reader.Name;
-import seedu.smartlib.model.reader.Phone;
-import seedu.smartlib.model.reader.Reader;
+import seedu.smartlib.model.reader.*;
 import seedu.smartlib.model.tag.Tag;
 
 /**
@@ -43,8 +36,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Remark remark = new Remark(""); // add command does not allow adding remarks straight away
 
-        Reader reader = new Reader(name, phone, email, address, tagList);
+        Reader reader = new Reader(name, phone, email, address, remark, tagList);
 
         return new AddCommand(reader);
     }
